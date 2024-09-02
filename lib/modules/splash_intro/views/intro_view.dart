@@ -29,7 +29,7 @@ class IntroScreen extends StatelessWidget {
               :const SizedBox.shrink(),
             ),
             // Overlay text
-            _overlayComponents(),
+            _overlayComponents(context),
           ],
         );
   },
@@ -39,7 +39,7 @@ class IntroScreen extends StatelessWidget {
     );
   }
 
-  Widget _overlayComponents(){
+  Widget _overlayComponents(context){
     return Padding(
       padding: const EdgeInsets.all(20),
       child: Column(
@@ -63,7 +63,7 @@ class IntroScreen extends StatelessWidget {
           ),
           TextHighlightAnimation(),
           ElevatedButton(onPressed: (){
-            // Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhoneAuthenticationView()));
+            Navigator.of(context).push(MaterialPageRoute(builder: (context)=>PhoneAuthenticationView()));
           },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepOrange,

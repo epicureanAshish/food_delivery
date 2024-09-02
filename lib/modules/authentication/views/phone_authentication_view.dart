@@ -5,6 +5,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:food_delivery/modules/authentication/blocs/phone_auth_bloc.dart';
+import 'package:food_delivery/modules/permissions/views/location_permission_view.dart';
 
 class PhoneAuthenticationView extends StatelessWidget {
 
@@ -24,12 +25,27 @@ class PhoneAuthenticationView extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.black), // Custom icon
+          icon: const Icon(Icons.arrow_back, color: Colors.black), // Custom icon
           onPressed: () {
             // Define the action for the back button
             Navigator.of(context).pop();
           },
         ),
+        actions: [
+          ElevatedButton(
+
+              onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>LocationPermissionView()));
+              },
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.black,
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8))
+              ),
+
+              child: const Text("Skip", style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),)
+          ),
+          const SizedBox(width: 20,)
+        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -37,11 +53,11 @@ class PhoneAuthenticationView extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             // Title
-            Text(
+            const Text(
               'Enter your mobile number to get OTP',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Mobile number field with country code
             TextField(
@@ -51,7 +67,7 @@ class PhoneAuthenticationView extends StatelessWidget {
                 bloc.add(PhoneAuthValidate(mobile: value));
               },
               decoration: InputDecoration(
-                prefixIconConstraints: BoxConstraints(
+                prefixIconConstraints: const BoxConstraints(
                    minHeight: 20,
                    minWidth: 70
                 ),
@@ -63,24 +79,24 @@ class PhoneAuthenticationView extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(_selectedCountryCode + ' ',
-                        style: TextStyle(
+                        style: const TextStyle(
                           color: Colors.black,
                           fontWeight: FontWeight.bold,
                         )),
-                        VerticalDivider()
+                        const VerticalDivider()
                       ],
                     ),
                   ),
                 ),
                 labelText: "Mobile Number",
-                floatingLabelStyle: TextStyle(color: Colors.deepOrange),
+                floatingLabelStyle: const TextStyle(color: Colors.deepOrange),
                 floatingLabelBehavior: FloatingLabelBehavior.always ,
-                border: OutlineInputBorder(),
-                focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
+                border: const OutlineInputBorder(),
+                focusedBorder: const OutlineInputBorder(borderSide: BorderSide(color: Colors.deepOrange)),
                 hintText: '10 digit mobile number',
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Submit button
             BlocBuilder<PhoneAuthBloc, PhoneAuthState>(
@@ -93,27 +109,27 @@ class PhoneAuthenticationView extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     disabledBackgroundColor: Colors.deepOrange.withOpacity(0.3),
                       backgroundColor: Colors.deepOrange,
-                      fixedSize: Size(double.maxFinite, 50),
+                      fixedSize: const Size(double.maxFinite, 50),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10))
                   ),
 
-                  child: Text("Get OTP", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                  child: const Text("Get OTP", style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
               ),
             );
   },
 ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
 
             // Terms and Policy rich text
             RichText(
               text: TextSpan(
-                style: TextStyle(color: Colors.black, fontSize: 14),
+                style: const TextStyle(color: Colors.black, fontSize: 14),
                 children: <TextSpan>[
-                  TextSpan(text: 'By signing up, you agree to our '),
+                  const TextSpan(text: 'By signing up, you agree to our '),
                   TextSpan(
                     text: 'terms of service',
 
-                    style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline,
+                    style: const TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline,
                       decorationThickness: 0.5
                     ),
                     recognizer: TapGestureRecognizer()
@@ -122,10 +138,10 @@ class PhoneAuthenticationView extends StatelessWidget {
                         print('Terms of Service tapped');
                       },
                   ),
-                  TextSpan(text: ' and '),
+                  const TextSpan(text: ' and '),
                   TextSpan(
                     text: 'privacy policy',
-                    style: TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline,
+                    style: const TextStyle(fontWeight: FontWeight.bold, decoration: TextDecoration.underline,
                         decorationThickness: 0.5
                     ),
                     recognizer: TapGestureRecognizer()
@@ -134,7 +150,7 @@ class PhoneAuthenticationView extends StatelessWidget {
                         print('Privacy Policy tapped');
                       },
                   ),
-                  TextSpan(text: '.'),
+                  const TextSpan(text: '.'),
                 ],
               ),
             ),
